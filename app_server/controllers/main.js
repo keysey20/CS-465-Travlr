@@ -1,6 +1,9 @@
+const trips = require('../data/trips.json');
+
 const renderPage = (view, title) => (req, res) => {
   res.render(view, {
     title,
+    trips: view === 'travel' ? trips : [],
     isHome: view === 'index',
     isTravel: view === 'travel',
     isRooms: view === 'rooms',
