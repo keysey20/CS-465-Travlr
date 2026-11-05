@@ -1,5 +1,14 @@
 const renderPage = (view, title) => (req, res) => {
-  res.render(view, { title });
+  res.render(view, {
+    title,
+    isHome: view === 'index',
+    isTravel: view === 'travel',
+    isRooms: view === 'rooms',
+    isMeals: view === 'meals',
+    isNews: view === 'news',
+    isAbout: view === 'about',
+    isContact: view === 'contact'
+  });
 };
 
 module.exports = {
