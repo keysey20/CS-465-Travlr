@@ -1,0 +1,26 @@
+<h2>Edit Trip</h2>
+
+@if (loading()) {
+  <p>Loading trip…</p>
+}
+
+@if (errorMessage()) {
+  <p role="alert">{{ errorMessage() }}</p>
+}
+
+@if (trip(); as currentTrip) {
+  <form #tripForm="ngForm" (ngSubmit)="saveTrip()">
+    <p><label>Trip code <input [value]="currentTrip.code" readonly></label></p>
+    <p><label>Trip name <input name="name" [(ngModel)]="currentTrip.name" required></label></p>
+    <p><label>Length <input name="length" [(ngModel)]="currentTrip.length" required></label></p>
+    <p><label>Start date <input type="date" name="start" [(ngModel)]="currentTrip.start" required></label></p>
+    <p><label>Resort <input name="resort" [(ngModel)]="currentTrip.resort" required></label></p>
+    <p><label>Price per person <input name="perPerson" [(ngModel)]="currentTrip.perPerson" required></label></p>
+    <p><label>Image path <input name="image" [(ngModel)]="currentTrip.image" required></label></p>
+    <p><label>Description <textarea name="description" [(ngModel)]="currentTrip.description" required></textarea></label></p>
+
+    <button type="submit" [disabled]="tripForm.invalid || saving()">Update Trip</button>
+  </form>
+}
+
+<p><a routerLink="/">Cancel</a></p>

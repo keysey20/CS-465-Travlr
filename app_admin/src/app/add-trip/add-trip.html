@@ -1,0 +1,19 @@
+<h2>Add Trip</h2>
+
+@if (errorMessage()) {
+  <p role="alert">{{ errorMessage() }}</p>
+}
+
+<form #tripForm="ngForm" (ngSubmit)="saveTrip()">
+  <p><label>Trip code <input name="code" [(ngModel)]="trip.code" required></label></p>
+  <p><label>Trip name <input name="name" [(ngModel)]="trip.name" required></label></p>
+  <p><label>Length <input name="length" [(ngModel)]="trip.length" required></label></p>
+  <p><label>Start date <input type="date" name="start" [(ngModel)]="trip.start" required></label></p>
+  <p><label>Resort <input name="resort" [(ngModel)]="trip.resort" required></label></p>
+  <p><label>Price per person <input name="perPerson" [(ngModel)]="trip.perPerson" required></label></p>
+  <p><label>Image path <input name="image" [(ngModel)]="trip.image" required></label></p>
+  <p><label>Description <textarea name="description" [(ngModel)]="trip.description" required></textarea></label></p>
+
+  <button type="submit" [disabled]="tripForm.invalid || saving()">Save Trip</button>
+  <a routerLink="/">Cancel</a>
+</form>

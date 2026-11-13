@@ -1,0 +1,5 @@
+<article>
+  <h3>{{ trip().name }}</h3>
+  <p>{{ trip().length }}</p>
+  <a [routerLink]="['/edit-trip', trip().code]">Edit</a>
+</article>
