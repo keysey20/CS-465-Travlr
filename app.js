@@ -1,6 +1,8 @@
+const apiRouter = require('./app_api/routes');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
+const connect = require('./app_api/models/db');
 const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
 
@@ -27,7 +29,7 @@ app.use(cookieParser());
 
 // Serve static Travlr assets
 const publicPath = path.join(__dirname, 'app_server', 'public');
-// MVC routes take priority over static HTML files
+app.use('/api', apiRouter);
 app.use('/', mvcRouter);
 
 // Serve CSS, images, and other static assets
@@ -37,7 +39,14 @@ app.use(express.static(publicPath));
 app.use('/express', indexRouter);
 app.use('/users', usersRouter);
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Travlr Getaways running at http://localhost:${PORT}`);
-});
+// Start the server after MongoDB connects.
+connect()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Travlr Getaways running at http://localhost:${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('Could not start Travlr:', error.message);
+    process.exitCode = 1;
+  });
