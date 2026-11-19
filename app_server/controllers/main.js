@@ -2,7 +2,6 @@ const renderPage = (view, title) => (req, res) => {
   res.render(view, {
     title,
     isHome: view === 'index',
-    isTravel: view === 'travel',
     isRooms: view === 'rooms',
     isMeals: view === 'meals',
     isNews: view === 'news',
@@ -13,7 +12,6 @@ const renderPage = (view, title) => (req, res) => {
 
 module.exports = {
   index: renderPage('index', 'Travlr Getaways'),
-  travel: renderPage('travel', 'Travel | Travlr Getaways'),
   rooms: renderPage('rooms', 'Rooms | Travlr Getaways'),
   meals: renderPage('meals', 'Meals | Travlr Getaways'),
   news: renderPage('news', 'News | Travlr Getaways'),
